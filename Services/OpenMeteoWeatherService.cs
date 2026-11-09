@@ -34,4 +34,5 @@ namespace LifeManagementApp.Services
                 WindSpeed = current.GetProperty("wind_speed_10m").GetDouble()
             };
         }
+    }
 }

@@ -12,23 +12,24 @@ namespace LifeManagementApp.Services
     public class TodoRepository : ITodoRepository
 
     {
-    private readonly AppDbContext _db;
+        private readonly AppDbContext _db;
 
-    public TodoRepository(AppDbContext db)
-    {
-        _db = db;
-    }
+        public TodoRepository(AppDbContext db)
+        {
+            _db = db;
+        }
 
-    public async Task<List<TodoItem>> GetAllAsync()
-    {
-        return await _db.Todos.ToListAsync();
-    }
+        public async Task<List<TodoItem>> GetAllAsync()
+        {
+            return await _db.Todos.ToListAsync();
+        }
 
-    public async Task AddAsync(TodoItem item)
-    {
-        _db.Todos.Add(item);
+        public async Task AddAsync(TodoItem item)
+        {
+            _db.Todos.Add(item);
 
-        await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
 
+        }
     }
 }
