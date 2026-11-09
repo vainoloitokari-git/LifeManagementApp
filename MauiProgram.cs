@@ -1,4 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using LifeManagementApp.Data;
+using LifeManagementApp.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace LifeManagementApp
 {
@@ -7,6 +11,7 @@ namespace LifeManagementApp
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
@@ -16,8 +21,22 @@ namespace LifeManagementApp
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                var dbPath = Path.Combine(
+                    FileSystem.AppDataDirectory,
+                    "todo.db");
+
+                options.UseSqlite($"Data Source={dbPath}");
+            });
+
+            builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+
+            builder.Services.AddHttpClient<IWeatherService,
+                                          OpenMeteoWeatherService>();
 
             return builder.Build();
         }
