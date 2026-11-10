@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using LifeManagementApp.Models;
 
-namespace LifeManagementApp.Data
-{
-    public class AppDbContext : DbContext
-    {
-        public DbSet<TodoItem> Todos { get; set; }
+namespace LifeManagementApp.Data;
 
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options)
-        {
-        }
+public class AppDbContext : DbContext
+{
+    public DbSet<TodoItem> Todos { get; set; }
+
+    public AppDbContext(
+        DbContextOptions<AppDbContext> options)
+        : base(options)
+    {
     }
 }
