@@ -5,18 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace LifeManagementApp.Models
+namespace LifeManagementApp.Models;
+
+public class TodoItem
 {
-    public class TodoItem
+    public int Id { get; set; }
+
+    public string Title { get; set; } = "";
+
+    public int Priority { get; set; }
+
+    public DateTime DueDate { get; set; }
+
+    public bool IsDone { get; set; }
+
+    public string PriorityText => Priority switch
     {
-        public int Id { get; set; }
-
-        public string Title { get; set; } = "";
-
-        public int Priority { get; set; }
-
-        public DateTime DueDate { get; set; }
-
-        public bool IsDone { get; set; }
-    }
+        1 => "🔴 Erittäin tärkeä",
+        2 => "🟡 Ei kiireellinen",
+        3 => "🟢 Voi suorittaa myöhemmin",
+        _ => "⚪ Tuntematon"
+    };
 }

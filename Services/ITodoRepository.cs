@@ -12,5 +12,7 @@ namespace LifeManagementApp.Services
         Task<List<TodoItem>> GetAllAsync();
 
         Task AddAsync(TodoItem item);
+
+        Task<List<TodoItem>> GetTopThreeAsync();
     }
 }
