@@ -4,48 +4,80 @@
     x:Class="LifeManagementApp.Views.TodoListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Todos">
+    Title="Todos"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#240046">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <ScrollView>
 
-        <Label
-            Text="Tehtävälista"
-            FontSize="28"
-            FontAttributes="Bold"
-            HorizontalOptions="Center" />
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="10">
 
-        <CollectionView ItemsSource="{Binding Todos}">
+            <Label
+                Text="Tehtävälista"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
 
-            <CollectionView.ItemTemplate>
+            <!-- Uusi tehtävä -->
 
-                <DataTemplate>
+            <Frame Padding="15">
 
-                    <Frame
-                        Margin="0,5"
-                        Padding="15"
-                        BorderColor="Gray">
+                <VerticalStackLayout Spacing="10">
 
-                        <VerticalStackLayout Spacing="5">
+                    <Entry
+                        Placeholder="Tehtävän nimi"
+                        Text="{Binding NewTodoTitle}" />
 
-                            <Label
-                                Text="{Binding Title}"
-                                FontSize="18"
-                                FontAttributes="Bold" />
+                    <Picker
+                        Title="Prioriteetti"
+                        ItemsSource="{Binding Priorities}"
+                        SelectedItem="{Binding SelectedPriorityText}" />
 
-                            <Label
-                                Text="{Binding PriorityText}"
-                                FontSize="14" />
+                    <Button
+                        Text="Lisää tehtävä"
+                        Command="{Binding AddTodoCommand}" />
 
-                        </VerticalStackLayout>
+                </VerticalStackLayout>
 
-                    </Frame>
+            </Frame>
 
-                </DataTemplate>
+            <!-- Tehtävälista -->
 
-            </CollectionView.ItemTemplate>
+            <CollectionView
+                ItemsSource="{Binding Todos}">
 
-        </CollectionView>
+                <CollectionView.ItemTemplate>
 
-    </VerticalStackLayout>
+                    <DataTemplate>
+
+                        <Frame
+                            Margin="0,5"
+                            Padding="10">
+
+                            <VerticalStackLayout>
+
+                                <Label
+                                    Text="{Binding Title}"
+                                    FontSize="18"
+                                    FontAttributes="Bold" />
+
+                                <Label
+                                    Text="{Binding PriorityText}" />
+
+                            </VerticalStackLayout>
+
+                        </Frame>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
 
 </ContentPage>

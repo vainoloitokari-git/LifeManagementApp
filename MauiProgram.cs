@@ -58,7 +58,16 @@ namespace LifeManagementApp
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<TodoListPage>();
 
-            return builder.Build();
+            var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+                db.Database.EnsureCreated();
+            }
+
+            return app;
         }
     }
 }

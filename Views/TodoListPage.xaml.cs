@@ -4,10 +4,10 @@ namespace LifeManagementApp.Views;
 
 public partial class TodoListPage : ContentPage
 {
-    public TodoListPage()
+    public TodoListPage(TodoListViewModel viewModel)
     {
         InitializeComponent();
 
-        BindingContext = new TodoListViewModel();
+        BindingContext = viewModel;
     }
 }
