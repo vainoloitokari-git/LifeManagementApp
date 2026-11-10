@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using LifeManagementApp.Data;
 using LifeManagementApp.Services;
 using Microsoft.Extensions.DependencyInjection;
+using LifeManagementApp.ViewModels;
+using LifeManagementApp.Views;
+using LifeManagementApp.Models;
 
 namespace LifeManagementApp
 {
@@ -24,19 +27,36 @@ namespace LifeManagementApp
             builder.Logging.AddDebug();
 #endif
 
+            // SQLite / EF Core
+
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
-                var dbPath = Path.Combine(
+                string dbPath = Path.Combine(
                     FileSystem.AppDataDirectory,
                     "todo.db");
 
-                options.UseSqlite($"Data Source={dbPath}");
+                options.UseSqlite(
+                    $"Data Source={dbPath}");
             });
+
+            // Repositories
 
             builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 
+            // Services
+
             builder.Services.AddHttpClient<IWeatherService,
-                                          OpenMeteoWeatherService>();
+                                           OpenMeteoWeatherService>();
+
+            // ViewModels
+
+            builder.Services.AddTransient<HomeViewModel>();
+            builder.Services.AddTransient<TodoListViewModel>();
+
+            // Pages
+
+            builder.Services.AddTransient<HomePage>();
+            builder.Services.AddTransient<TodoListPage>();
 
             return builder.Build();
         }

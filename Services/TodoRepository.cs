@@ -31,5 +31,13 @@ namespace LifeManagementApp.Services
             await _db.SaveChangesAsync();
 
         }
+        public async Task<List<TodoItem>> GetTopThreeAsync()
+        {
+            return await _db.Todos
+                .Where(t => !t.IsDone)
+                .OrderBy(t => t.Priority)
+                .Take(3)
+                .ToListAsync();
+        }
     }
 }

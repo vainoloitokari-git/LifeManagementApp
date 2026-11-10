@@ -3,31 +3,38 @@
 <ContentPage
     x:Class="LifeManagementApp.Views.TodoListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Todos">
 
-    <VerticalStackLayout Padding="20">
+    <VerticalStackLayout Padding="20" Spacing="15">
 
         <Label
-            Text="Todo List"
+            Text="Tehtävälista"
             FontSize="28"
-            FontAttributes="Bold" />
+            FontAttributes="Bold"
+            HorizontalOptions="Center" />
 
-        <CollectionView>
+        <CollectionView ItemsSource="{Binding Todos}">
 
             <CollectionView.ItemTemplate>
 
                 <DataTemplate>
 
-                    <Frame Margin="0,5">
+                    <Frame
+                        Margin="0,5"
+                        Padding="15"
+                        BorderColor="Gray">
 
-                        <VerticalStackLayout>
+                        <VerticalStackLayout Spacing="5">
 
                             <Label
-                                Text="Esimerkkitehtävä"
+                                Text="{Binding Title}"
+                                FontSize="18"
                                 FontAttributes="Bold" />
 
                             <Label
-                                Text="Prioriteetti: 1" />
+                                Text="{Binding PriorityText}"
+                                FontSize="14" />
 
                         </VerticalStackLayout>
 

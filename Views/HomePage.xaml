@@ -3,23 +3,84 @@
 <ContentPage
     x:Class="LifeManagementApp.Views.HomePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Home">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <ScrollView>
 
-        <Label
-            Text="Life Management App"
-            FontSize="28"
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="15">
+
+            <Label
+                Text="Life Management App"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Frame Padding="15">
+
+                <VerticalStackLayout>
+
+                    <Label
+                        Text="🌤 Nykyinen sää"
+                        FontSize="20"
+                        FontAttributes="Bold" />
+
+                    <Label
+                        Text="{Binding TemperatureText}" />
+
+                    <Label
+                        Text="{Binding WindText}" />
+
+                    <Label
+                        Text="{Binding KitesurfText}"
+                        FontAttributes="Bold"
+                        TextColor="Green" />
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <Frame Padding="15">
+
+                <VerticalStackLayout>
+
+                    <Label
+            Text="📋 Tärkeimmät tehtävät"
+            FontSize="20"
             FontAttributes="Bold" />
 
-        <Label
-            Text="Etusivu"
-            FontSize="20" />
+                    <CollectionView
+            ItemsSource="{Binding TopTodos}">
 
-        <Label
-            Text="{Binding WeatherText}"
-            FontSize="16" />
+                        <CollectionView.ItemTemplate>
 
-    </VerticalStackLayout>
+                            <DataTemplate>
+
+                                <VerticalStackLayout Padding="5">
+
+                                    <Label
+                            Text="{Binding Title}"
+                            FontAttributes="Bold" />
+
+                                    <Label
+                            Text="{Binding PriorityText}" />
+
+                                </VerticalStackLayout>
+
+                            </DataTemplate>
+
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
 
 </ContentPage>
