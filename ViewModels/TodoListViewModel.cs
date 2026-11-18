@@ -41,6 +41,15 @@ public partial class TodoListViewModel : ObservableObject
         LoadTodos();
     }
 
+    [ObservableProperty]
+    private string selectedSortOption = "Korkea → Matala";
+
+    public List<string> SortOptions { get; } =
+    [
+        "Korkea → Matala",
+    "Matala → Korkea"
+    ];
+
     [RelayCommand]
     private async Task AddTodo()
     {
@@ -76,9 +85,27 @@ public partial class TodoListViewModel : ObservableObject
 
         var todos = await _repository.GetAllAsync();
 
+        if (SelectedSortOption == "Korkea → Matala")
+        {
+            todos = todos
+                .OrderBy(t => t.Priority)
+                .ToList();
+        }
+        else
+        {
+            todos = todos
+                .OrderByDescending(t => t.Priority)
+                .ToList();
+        }
+
         foreach (var todo in todos)
         {
             Todos.Add(todo);
         }
     }
+    partial void OnSelectedSortOptionChanged(string value)
+    {
+        _ = LoadTodos();
+    }
+
 }

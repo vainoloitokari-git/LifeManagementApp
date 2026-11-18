@@ -12,32 +12,75 @@
 
         <VerticalStackLayout
             Padding="20"
-            Spacing="10">
+            Spacing="15">
+
+            <!-- Otsikko -->
 
             <Label
                 Text="Tehtävälista"
                 FontSize="28"
                 FontAttributes="Bold"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center"
+                TextColor="#E0AAFF" />
 
-            <!-- Uusi tehtävä -->
+            <!-- Lisää tehtävä -->
 
-            <Frame Padding="15">
+            <Frame
+                Padding="15"
+                BackgroundColor="Black"
+                BorderColor="#9D4EDD">
 
                 <VerticalStackLayout Spacing="10">
 
+                    <Label
+                        Text="Lisää tehtävä"
+                        TextColor="White" />
+
                     <Entry
                         Placeholder="Tehtävän nimi"
-                        Text="{Binding NewTodoTitle}" />
+                        Text="{Binding NewTodoTitle}"
+                        BackgroundColor="Black"
+                        TextColor="White"
+                        PlaceholderColor="Gray" />
+
+                    <Label
+                        Text="Prioriteetti"
+                        TextColor="White" />
 
                     <Picker
-                        Title="Prioriteetti"
+                        BackgroundColor="Black"
+                        TextColor="White"
                         ItemsSource="{Binding Priorities}"
                         SelectedItem="{Binding SelectedPriorityText}" />
 
                     <Button
-                        Text="Lisää tehtävä"
-                        Command="{Binding AddTodoCommand}" />
+                        Text="Lisää"
+                        Command="{Binding AddTodoCommand}"
+                        BackgroundColor="#BFA2DB"
+                        TextColor="Black" />
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <!-- Lajittelu -->
+
+            <Frame
+                Padding="15"
+                BackgroundColor="Black"
+                BorderColor="#9D4EDD">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label
+                        Text="Lajittele"
+                        TextColor="White" />
+
+                    <Picker
+                        BackgroundColor="Black"
+                        TextColor="White"
+                        ItemsSource="{Binding SortOptions}"
+                        SelectedItem="{Binding SelectedSortOption}" />
 
                 </VerticalStackLayout>
 
@@ -54,17 +97,21 @@
 
                         <Frame
                             Margin="0,5"
-                            Padding="10">
+                            Padding="12"
+                            BackgroundColor="Black"
+                            BorderColor="#9D4EDD">
 
-                            <VerticalStackLayout>
+                            <VerticalStackLayout Spacing="5">
 
                                 <Label
                                     Text="{Binding Title}"
                                     FontSize="18"
-                                    FontAttributes="Bold" />
+                                    FontAttributes="Bold"
+                                    TextColor="White" />
 
                                 <Label
-                                    Text="{Binding PriorityText}" />
+                                    Text="{Binding PriorityText}"
+                                    TextColor="White" />
 
                             </VerticalStackLayout>
 
