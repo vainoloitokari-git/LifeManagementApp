@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="LifeManagementApp.Views.NotesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Muistio"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="#240046">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="15">
+
+            <Label
+                Text="Muistio"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                TextColor="#E0AAFF" />
+
+            <Frame
+                Padding="15"
+                BackgroundColor="Black"
+                BorderColor="#9D4EDD">
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Editor
+                        HeightRequest="300"
+                        Text="{Binding NotesText}"
+                        Placeholder="Kirjoita muistiinpanosi tähän..."
+                        TextColor="White"
+                        BackgroundColor="Black"
+                        PlaceholderColor="Gray" />
+
+                    <Button
+                        Text="Tallenna"
+                        Command="{Binding SaveNoteCommand}"
+                        BackgroundColor="#BFA2DB"
+                        TextColor="Black" />
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>
