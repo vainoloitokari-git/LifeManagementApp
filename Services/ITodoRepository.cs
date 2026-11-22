@@ -5,14 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using LifeManagementApp.Models;
 
-namespace LifeManagementApp.Services
+namespace LifeManagementApp.Services;
+
+public interface ITodoRepository
 {
-    public interface ITodoRepository
-    {
-        Task<List<TodoItem>> GetAllAsync();
+    Task<List<TodoItem>> GetAllAsync();
 
-        Task AddAsync(TodoItem item);
+    Task AddAsync(TodoItem item);
 
-        Task<List<TodoItem>> GetTopThreeAsync();
-    }
+    Task<List<TodoItem>> GetTopThreeAsync();
 }

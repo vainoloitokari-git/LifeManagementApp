@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
-using LifeManagementApp.Services;
 using System.Collections.ObjectModel;
 using LifeManagementApp.Models;
+using LifeManagementApp.Services;
 
 namespace LifeManagementApp.ViewModels;
 
@@ -43,19 +43,21 @@ public partial class HomeViewModel : ObservableObject
         {
             var weather = await _weatherService.GetWeatherAsync();
 
-            TemperatureText = $"Lämpötila: {weather.Temperature:F1} °C";
+            TemperatureText =
+                $"Lämpötila: {weather.Temperature:F1} °C";
 
-            WindText = $"Tuuli: {weather.WindSpeed:F1} m/s";
+            WindText =
+                $"Tuuli: {weather.WindSpeed:F1} m/s";
 
-            KitesurfText = weather.IsKitesurfWeather
-                ? "🏄 Kitesurf-keli!"
-                : "Ei kitesurf-keliä";
+            KitesurfText =
+                weather.IsKitesurfWeather
+                    ? "🏄 Kitesurf-keli!"
+                    : "Ei kitesurf-keliä";
         }
         catch
         {
-            TemperatureText = "Säätietojen haku epäonnistui.";
-            WindText = "";
-            KitesurfText = "";
+            TemperatureText =
+                "Säätietojen haku epäonnistui.";
         }
     }
 
@@ -63,7 +65,8 @@ public partial class HomeViewModel : ObservableObject
     {
         try
         {
-            var todos = await _todoRepository.GetTopThreeAsync();
+            var todos =
+                await _todoRepository.GetTopThreeAsync();
 
             TopTodos.Clear();
 
@@ -74,8 +77,6 @@ public partial class HomeViewModel : ObservableObject
         }
         catch
         {
-            TemperatureText =
-       "Säätietojen haku epäonnistui.";
         }
     }
 }

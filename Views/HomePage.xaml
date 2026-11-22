@@ -4,7 +4,7 @@
     x:Class="LifeManagementApp.Views.HomePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Home"
+    Title="Etusivu"
     Shell.NavBarIsVisible="False"
     BackgroundColor="#240046">
 
@@ -18,43 +18,58 @@
                 Text="Life Management App"
                 FontSize="28"
                 FontAttributes="Bold"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center"
+                TextColor="#E0AAFF" />
 
-            <Frame Padding="15">
+            <!-- Sää -->
+
+            <Frame
+                Padding="15"
+                BackgroundColor="Black"
+                BorderColor="#9D4EDD">
 
                 <VerticalStackLayout>
 
                     <Label
                         Text="🌤 Nykyinen sää"
                         FontSize="20"
-                        FontAttributes="Bold" />
+                        FontAttributes="Bold"
+                        TextColor="White" />
 
                     <Label
-                        Text="{Binding TemperatureText}" />
+                        Text="{Binding TemperatureText}"
+                        TextColor="White" />
 
                     <Label
-                        Text="{Binding WindText}" />
+                        Text="{Binding WindText}"
+                        TextColor="White" />
 
                     <Label
                         Text="{Binding KitesurfText}"
-                        FontAttributes="Bold"
-                        TextColor="Green" />
+                        TextColor="#7CFC00"
+                        FontAttributes="Bold" />
 
                 </VerticalStackLayout>
 
             </Frame>
 
-            <Frame Padding="15">
+            <!-- Tärkeimmät tehtävät -->
+
+            <Frame
+                Padding="15"
+                BackgroundColor="Black"
+                BorderColor="#9D4EDD">
 
                 <VerticalStackLayout>
 
                     <Label
-            Text="📋 Tärkeimmät tehtävät"
-            FontSize="20"
-            FontAttributes="Bold" />
+                        Text="📋 Tärkeimmät tehtävät"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="White" />
 
                     <CollectionView
-            ItemsSource="{Binding TopTodos}">
+                        ItemsSource="{Binding TopTodos}">
 
                         <CollectionView.ItemTemplate>
 
@@ -63,11 +78,13 @@
                                 <VerticalStackLayout Padding="5">
 
                                     <Label
-                            Text="{Binding Title}"
-                            FontAttributes="Bold" />
+                                        Text="{Binding Title}"
+                                        FontAttributes="Bold"
+                                        TextColor="White" />
 
                                     <Label
-                            Text="{Binding PriorityText}" />
+                                        Text="{Binding PriorityText}"
+                                        TextColor="White" />
 
                                 </VerticalStackLayout>
 

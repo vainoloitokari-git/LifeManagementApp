@@ -22,8 +22,9 @@ public class TodoItem
     public string PriorityText => Priority switch
     {
         1 => "🔴 Erittäin tärkeä",
-        2 => "🟡 Ei kiireellinen",
-        3 => "🟢 Voi suorittaa myöhemmin",
+        2 => "🟠 Hieman tärkeä",
+        3 => "🟡 Ei kiireellinen",
+        4 => "🟢 Voi suorittaa myöhemmin",
         _ => "⚪ Tuntematon"
     };
 }

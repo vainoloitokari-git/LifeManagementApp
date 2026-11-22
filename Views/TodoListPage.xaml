@@ -4,7 +4,7 @@
     x:Class="LifeManagementApp.Views.TodoListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Todos"
+    Title="Tehtävät"
     Shell.NavBarIsVisible="False"
     BackgroundColor="#240046">
 
@@ -52,6 +52,13 @@
                         TextColor="White"
                         ItemsSource="{Binding Priorities}"
                         SelectedItem="{Binding SelectedPriorityText}" />
+
+                    <Label
+                        Text="Eräpäivä"
+                        TextColor="White" />
+
+                    <DatePicker
+                        Date="{Binding SelectedDueDate}" />
 
                     <Button
                         Text="Lisää"
@@ -112,6 +119,10 @@
                                 <Label
                                     Text="{Binding PriorityText}"
                                     TextColor="White" />
+
+                                <Label
+                                    Text="{Binding DueDate, StringFormat='Eräpäivä: {0:dd.MM.yyyy}'}"
+                                    TextColor="LightGray" />
 
                             </VerticalStackLayout>
 

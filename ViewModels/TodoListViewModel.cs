@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using LifeManagementApp.Models;
@@ -21,34 +16,39 @@ public partial class TodoListViewModel : ObservableObject
     private string newTodoTitle = "";
 
     [ObservableProperty]
-    private int selectedPriority = 2;
+    private string selectedPriorityText = "Ei kiireellinen";
+
+    [ObservableProperty]
+    private DateTime selectedDueDate = DateTime.Today;
+
+    [ObservableProperty]
+    private string selectedSortOption =
+        "Prioriteetti (korkea → matala)";
 
     public List<string> Priorities { get; } =
         new()
         {
             "Erittäin tärkeä",
+            "Hieman tärkeä",
             "Ei kiireellinen",
             "Voi suorittaa myöhemmin"
         };
 
-    [ObservableProperty]
-    private string selectedPriorityText = "Ei kiireellinen";
+    public List<string> SortOptions { get; } =
+        new()
+        {
+            "Prioriteetti (korkea → matala)",
+            "Prioriteetti (matala → korkea)",
+            "Päivämäärä (uusin ensin)",
+            "Päivämäärä (vanhin ensin)"
+        };
 
     public TodoListViewModel(ITodoRepository repository)
     {
         _repository = repository;
 
-        LoadTodos();
+        _ = LoadTodos();
     }
-
-    [ObservableProperty]
-    private string selectedSortOption = "Korkea → Matala";
-
-    public List<string> SortOptions { get; } =
-    [
-        "Korkea → Matala",
-    "Matala → Korkea"
-    ];
 
     [RelayCommand]
     private async Task AddTodo()
@@ -59,22 +59,25 @@ public partial class TodoListViewModel : ObservableObject
         int priority = SelectedPriorityText switch
         {
             "Erittäin tärkeä" => 1,
-            "Ei kiireellinen" => 2,
-            "Voi suorittaa myöhemmin" => 3,
-            _ => 2
+            "Hieman tärkeä" => 2,
+            "Ei kiireellinen" => 3,
+            "Voi suorittaa myöhemmin" => 4,
+            _ => 3
         };
 
         var todo = new TodoItem
         {
             Title = NewTodoTitle,
             Priority = priority,
-            IsDone = false,
-            DueDate = DateTime.Now
+            DueDate = SelectedDueDate,
+            IsDone = false
         };
 
         await _repository.AddAsync(todo);
 
         NewTodoTitle = "";
+        SelectedDueDate = DateTime.Today;
+        SelectedPriorityText = "Ei kiireellinen";
 
         await LoadTodos();
     }
@@ -85,27 +88,31 @@ public partial class TodoListViewModel : ObservableObject
 
         var todos = await _repository.GetAllAsync();
 
-        if (SelectedSortOption == "Korkea → Matala")
+        todos = SelectedSortOption switch
         {
-            todos = todos
-                .OrderBy(t => t.Priority)
-                .ToList();
-        }
-        else
-        {
-            todos = todos
-                .OrderByDescending(t => t.Priority)
-                .ToList();
-        }
+            "Prioriteetti (korkea → matala)"
+                => todos.OrderBy(t => t.Priority).ToList(),
+
+            "Prioriteetti (matala → korkea)"
+                => todos.OrderByDescending(t => t.Priority).ToList(),
+
+            "Päivämäärä (uusin ensin)"
+                => todos.OrderByDescending(t => t.DueDate).ToList(),
+
+            "Päivämäärä (vanhin ensin)"
+                => todos.OrderBy(t => t.DueDate).ToList(),
+
+            _ => todos
+        };
 
         foreach (var todo in todos)
         {
             Todos.Add(todo);
         }
     }
+
     partial void OnSelectedSortOptionChanged(string value)
     {
         _ = LoadTodos();
     }
-
 }
