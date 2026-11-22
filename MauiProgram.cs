@@ -45,6 +45,8 @@ namespace LifeManagementApp
 
             // Services
 
+            // Services
+
             builder.Services.AddHttpClient<IWeatherService,
                                            OpenMeteoWeatherService>();
 
