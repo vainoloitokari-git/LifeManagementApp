@@ -61,6 +61,7 @@ namespace LifeManagementApp
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<TodoListPage>();
             builder.Services.AddTransient<NotesPage>();
+            builder.Services.AddSingleton<AppShell>();
 
             var app = builder.Build();
 

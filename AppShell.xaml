@@ -9,16 +9,16 @@
     <TabBar>
 
         <ShellContent
-            Title="Etusivu"
-            ContentTemplate="{DataTemplate views:HomePage}" />
+            x:Name="HomeShellContent"
+            Title="Etusivu" />
 
         <ShellContent
-            Title="Tehtävät"
-            ContentTemplate="{DataTemplate views:TodoListPage}" />
+            x:Name="TodoShellContent"
+            Title="Tehtävät" />
 
         <ShellContent
-            Title="Muistio"
-            ContentTemplate="{DataTemplate views:NotesPage}" />
+            x:Name="NotesShellContent"
+            Title="Muistio" />
 
     </TabBar>
 
